@@ -92,3 +92,13 @@ if __name__ == "__main__":
     
     # Save to file
     save_data(members)
+
+# Added 10 min sesion
+def remove_member(member_dict, name):
+    """Remove a mamber from chama"""
+    if name in member_dict:
+        del member_dict[name]
+        print(f" Member'{name}' removed")
+    else:
+        print(f" Member '{name}' not found")
+        
