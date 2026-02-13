@@ -101,4 +101,22 @@ def remove_member(member_dict, name):
         print(f" Member'{name}' removed")
     else:
         print(f" Member '{name}' not found")
-        
+
+
+#1. Loop through memmbers and print each with formating 
+def print_members(memmber_dict):
+    for name, balance in memmber_dict.items():
+        print(f" {name}:ksh {balance}")
+
+#2. Find members with balance belowwt threshold
+def low_balanc_members(memmber_dict, threshold=1000): 
+    low =[]
+    for name, balance in member_dict.items():
+        if balance < threshold:
+            low.append(name)
+        return low
+#3. Give bonus to everyone(loop+modify)
+def new_year_bonus(member_dict, bonus=200):
+    for name in member_dict:
+        member_dict[name] += bonus
+    print(f" New year bonus of ksh {bonus} added to all members")
