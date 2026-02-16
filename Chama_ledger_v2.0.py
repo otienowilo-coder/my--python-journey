@@ -8,11 +8,27 @@ import os
 # 1. INITIAL DATA
 # ---------------------------
 members = {
-    "Mama": 5000,
-    "Jane": 3000,
-    "Alice": 4500
-}
+    "Mama": {
+        "balance":5000,
+        "phone" : "072345678",
+        "joined" : "2024-01-10",
+        "last_contribution" : "2024-01-08",
+    },
 
+    "Jane": {
+        "balance": 3000,
+        "phone": '072345678',
+        "joined" : "2024-01-15",
+        "last_contribution" : "2024-02-08",
+    },
+
+    "Alice":{
+        "balance" :4500,
+        "phone" : "073456789",
+        "joined" :"2024-01-20",
+        "last_contribution":"2024-02-12",
+}
+}
 # ---------------------------
 # 2. CORE FUNCTIONS
 # ---------------------------
@@ -27,8 +43,10 @@ def add_member(member_dict, name, balance=0):
 def add_contribution(member_dict, name, amount):
     """Add money to member's balance"""
     if name in member_dict:
-        member_dict[name] += amount
-        print(f"✅ {name} contributed Ksh {amount}. New balance: {member_dict[name]}")
+        member_dict[name]['balance'] += amount
+        member_dict[name]['last_contribution'] = "2024-02-16"  # today
+        print(f"✅ {name} contributed Ksh {amount}")
+        print(f"   New balance: Ksh {member_dict[name]['balance']}")
     else:
         print(f"❌ Member '{name}' not found.")
 
@@ -41,13 +59,17 @@ def calculate_interest(member_dict, rate=0.05):
     return member_dict
 
 def show_all(member_dict):
-    """Display all members and balances"""
-    print("\n--- CHAMA BALANCES ---")
-    for name, bal in member_dict.items():
-        print(f"{name}: Ksh {bal}")
-    total = sum(member_dict.values())
-    print(f"💰 TOTAL: Ksh {total}")
-    print("----------------------\n")
+    """Display all members and their details"""
+    print("\n--- CHAMA MEMBERS ---")
+    for name, details in member_dict.items():
+        print(f"👤 {name}")
+        print(f"   Balance: Ksh {details['balance']}")
+        print(f"   Phone: {details['phone']}")
+        print(f"   Joined: {details['joined']}")
+    total = sum(details['balance'] for details in member_dict.values())
+    print(f"💰 TOTAL FUNDS: Ksh {total}")
+    print("---------------------\n")
+
 
 # ---------------------------
 # 3. FILE SAVE / LOAD
@@ -120,3 +142,30 @@ def new_year_bonus(member_dict, bonus=200):
     for name in member_dict:
         member_dict[name] += bonus
     print(f" New year bonus of ksh {bonus} added to all members")
+
+def get_member_by_phone(member_dict, phone):
+    """Find a member using their phone number"""
+    for name, details in member_dict.items():
+        if details['phone'] == phone:
+            print(f"📱 Found: {name} - Balance: Ksh {details['balance']}")
+            return name
+    print("❌ No member with that phone number.")
+    return None
+
+def low_balance_alert(member_dict, threshold=1000):
+    """List members below threshold"""
+    print(f"\n⚠️ Members with balance below Ksh {threshold}:")
+    found = False
+    for name, details in member_dict.items():
+        if details['balance'] < threshold:
+            print(f"   {name}: Ksh {details['balance']}")
+            found = True
+    if not found:
+        print("   None")
+if __name__ == "__main__":
+    print("🚀 CHAMA LEDGER v0.4 - NESTED DICTIONARIES")
+    
+    show_all(members)
+    add_contribution(members, "Mama", 1000)
+    get_member_by_phone(members, "0723456789")
+    low_balance_alert(members, 4000)
