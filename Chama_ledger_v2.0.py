@@ -169,3 +169,36 @@ if __name__ == "__main__":
     add_contribution(members, "Mama", 1000)
     get_member_by_phone(members, "0723456789")
     low_balance_alert(members, 4000)
+
+# 1. Get all member names as a list
+def get_member_list(member_dict):
+    """Return list of all member names"""
+    names = list(member_dict.keys())
+    print(f"📋 Members: {names}")
+    return names
+
+# 2. Get all balances as a list
+def get_balances_list(member_dict):
+    """Return list of all balances"""
+    balances = [details['balance'] for details in member_dict.values()]
+    print(f"💰 Balances: {balances}")
+    print(f"   Highest: Ksh {max(balances)}")
+    print(f"   Lowest: Ksh {min(balances)}")
+    return balances
+
+# 3. Sort members by balance
+def sort_members_by_balance(member_dict):
+    """Return members sorted by balance (highest first)"""
+    sorted_members = sorted(member_dict.items(), 
+                           key=lambda x: x[1]['balance'], 
+                           reverse=True)
+    print("\n📊 Members by balance:")
+    for name, details in sorted_members:
+        print(f"   {name}: Ksh {details['balance']}")
+    return sorted_members
+
+if __name__ == "__main__":
+    print("🔧 LIST METHODS TEST")
+    get_member_list(members)
+    get_balances_list(members)
+    sort_members_by_balance(members)
