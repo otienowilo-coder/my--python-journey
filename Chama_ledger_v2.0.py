@@ -133,14 +133,14 @@ def print_members(memmber_dict):
 #2. Find members with balance belowwt threshold
 def low_balanc_members(memmber_dict, threshold=1000): 
     low =[]
-    for name, balance in member_dict.items():
-        if balance < threshold:
+    for name, details in member_dict.items():
+        if details['balance'] < threshold:
             low.append(name)
         return low
 #3. Give bonus to everyone(loop+modify)
 def new_year_bonus(member_dict, bonus=200):
     for name in member_dict:
-        member_dict[name] += bonus
+        member_dict[name]['balance'] += bonus
     print(f" New year bonus of ksh {bonus} added to all members")
 
 def get_member_by_phone(member_dict, phone):
@@ -202,3 +202,22 @@ if __name__ == "__main__":
     get_member_list(members)
     get_balances_list(members)
     sort_members_by_balance(members)
+
+import json
+
+DATA_FILE = "chama_data.json"
+
+def save_data(member_dict):
+    """Save members to a JSON file"""
+    with open(DATA_FILE, "w") as f:
+        json.dump(member_dict, f, indent=2)
+    print(f"💾 Data saved to {DATA_FILE}")
+
+def load_data():
+    """Load members from JSON file (if exists)"""
+    try:
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("📁 No saved data found. Starting fresh.")
+        return {}
