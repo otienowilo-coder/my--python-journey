@@ -1,11 +1,15 @@
-# CHAMA LEDGER v0.3
+# CHAMA LEDGER v0.2.0
 # Thursday, Feb 12, 2026
+
+#============================
+# 1. IMPORT AND CONSTANTS
+#============================
 
 import json
 import os
 
 # ---------------------------
-# 1. INITIAL DATA
+# 2. INITIAL DATA
 # ---------------------------
 members = {
     "Mama": {
@@ -13,6 +17,7 @@ members = {
         "phone" : "072345678",
         "joined" : "2024-01-10",
         "last_contribution" : "2024-01-08",
+        "transactions":[]  # New list
     },
 
     "Jane": {
@@ -20,6 +25,7 @@ members = {
         "phone": '072345678',
         "joined" : "2024-01-15",
         "last_contribution" : "2024-02-08",
+        "transactions":[]
     },
 
     "Alice":{
@@ -27,10 +33,11 @@ members = {
         "phone" : "073456789",
         "joined" :"2024-01-20",
         "last_contribution":"2024-02-12",
+        "transactions":[]
 }
 }
 # ---------------------------
-# 2. CORE FUNCTIONS
+# 3. CORE FUNCTIONS
 # ---------------------------
 def add_member(member_dict, name, balance=0):
     """Add a new member to the chama"""
@@ -70,9 +77,39 @@ def show_all(member_dict):
     print(f"💰 TOTAL FUNDS: Ksh {total}")
     print("---------------------\n")
 
+#============================
+# 4. TRANSACTION FUNCTIONS
+#    (new fearture)
+#============================
+from datetime import date
+
+def add_transaction(member_dict, name, amount):
+    """Record a contribution with today's date"""
+    if name not in member_dict:
+        print(f"❌ Member '{name}' not found.")
+        return
+    
+    # Update balance
+    member_dict[name]['balance'] += amount
+    member_dict[name]['last_contribution'] = str(date.today())
+    
+    # Create transaction record
+    transaction = {
+        "date": str(date.today()),
+        "amount": amount,
+        "type": "contribution",
+        "balance_after": member_dict[name]['balance']
+    }
+    
+    # Append to transactions list
+    member_dict[name]['transactions'].append(transaction)
+    
+    print(f"✅ {name} contributed Ksh {amount}")
+    print(f"   New balance: Ksh {member_dict[name]['balance']}")
+    print(f"   Transaction recorded.")
 
 # ---------------------------
-# 3. FILE SAVE / LOAD
+# 5. FILE HANDLING
 # ---------------------------
 DATA_FILE = "chama_data.txt"
 
@@ -91,30 +128,6 @@ def load_data():
         print("📁 No saved data found. Starting fresh.")
         return {}
 
-# ---------------------------
-# 4. QUICK TEST (RUN THIS FILE)
-# ---------------------------
-if __name__ == "__main__":
-    print("🚀 CHAMA LEDGER v0.3")
-    
-    # Show current members
-    show_all(members)
-    
-    # Add a contribution
-    add_contribution(members, "Mama", 1000)
-    
-    # Add a new member
-    add_member(members, "Cate", 2000)
-    
-    # Apply 5% monthly interest
-    calculate_interest(members)
-    
-    # Show final state
-    show_all(members)
-    
-    # Save to file
-    save_data(members)
-
 # Added 10 min sesion
 def remove_member(member_dict, name):
     """Remove a mamber from chama"""
@@ -124,14 +137,18 @@ def remove_member(member_dict, name):
     else:
         print(f" Member '{name}' not found")
 
+#==============================
+# 6. UTILITY FUNCTIONS
+#    (list methods, helpers)
+#=============================
 
 #1. Loop through memmbers and print each with formating 
 def print_members(memmber_dict):
     for name, balance in memmber_dict.items():
         print(f" {name}:ksh {balance}")
 
-#2. Find members with balance belowwt threshold
-def low_balanc_members(memmber_dict, threshold=1000): 
+#2. Find members with balance below the threshold
+def low_balance_members(memmber_dict, threshold=1000): 
     low =[]
     for name, details in member_dict.items():
         if details['balance'] < threshold:
@@ -221,3 +238,28 @@ def load_data():
     except FileNotFoundError:
         print("📁 No saved data found. Starting fresh.")
         return {}
+
+
+# ---------------------------
+# 7. TEST/ DEMO CODE
+# ---------------------------
+if __name__ == "__main__":
+    print("🚀 CHAMA LEDGER v0.3")
+    
+    # Show current members
+    show_all(members)
+    
+    # Add a contribution
+    add_contribution(members, "Mama", 1000)
+    
+    # Add a new member
+    add_member(members, "Cate", 2000)
+    
+    # Apply 5% monthly interest
+    calculate_interest(members)
+    
+    # Show final state
+    show_all(members)
+    
+    # Save to file
+    save_data(members)
