@@ -7,6 +7,7 @@
 
 import json
 import os
+from date import date
 
 # ---------------------------
 # 2. INITIAL DATA
@@ -39,13 +40,18 @@ members = {
 # ---------------------------
 # 3. CORE FUNCTIONS
 # ---------------------------
-def add_member(member_dict, name, balance=0):
-    """Add a new member to the chama"""
+def add_member(member_dict, name, balance=0, phone=""):
     if name not in member_dict:
-        member_dict[name] = balance
-        print(f"➕ Member '{name}' added with balance Ksh {balance}")
+        member_dict[name] = {
+            "balance": balance,
+            "phone": phone,
+            "joined": str(date.today()),
+            "last_contribution": str(date.today()),
+            "transactions": []
+        }
+        print(f"➕ Member '{name}' added")
     else:
-        print(f"⚠️ Member '{name}' already exists.")
+        print("⚠️ Already exists.")                   # Now using nested dict  to maintain uniform records and support future features: transactions dates
 
 def add_contribution(member_dict, name, amount):
     """Add money to member's balance"""
@@ -60,8 +66,9 @@ def add_contribution(member_dict, name, amount):
 def calculate_interest(member_dict, rate=0.05):
     """Apply monthly interest to all balances"""
     for name in member_dict:
-        interest = member_dict[name] * rate
-        member_dict[name] += interest
+        bal = member_dict[name]['balance']
+        interest = bal * rate
+        member_dict[name]['balance']+= interest
         print(f"📈 {name}: +Ksh {interest:.2f} interest (5%)")
     return member_dict
 
@@ -148,7 +155,7 @@ def print_members(memmber_dict):
         print(f" {name}:ksh {balance}")
 
 #2. Find members with balance below the threshold
-def low_balance_members(memmber_dict, threshold=1000): 
+def low_balance_members(member_dict, threshold=1000): 
     low =[]
     for name, details in member_dict.items():
         if details['balance'] < threshold:
