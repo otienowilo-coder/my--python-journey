@@ -7,7 +7,7 @@
 
 import json
 import os
-from date import date
+from datetime import date
 
 # ---------------------------
 # 2. INITIAL DATA
@@ -251,13 +251,13 @@ def load_data():
 # 7. TEST/ DEMO CODE
 # ---------------------------
 if __name__ == "__main__":
-    print("🚀 CHAMA LEDGER v0.3")
+    print("🚀 CHAMA LEDGER v0.2")
     
     # Show current members
     show_all(members)
     
     # Add a contribution
-    add_contribution(members, "Mama", 1000)
+    add_transaction(members, "Mama", 1000)
     
     # Add a new member
     add_member(members, "Cate", 2000)
