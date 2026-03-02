@@ -246,6 +246,22 @@ def load_data():
         print("📁 No saved data found. Starting fresh.")
         return {}
 
+from datetime import datetime, timedelta
+
+def overdue_contributions(member_dict, days=30):
+    """List members who haven't contributed in the last 'days' days."""
+    cutoff = (datetime.now() - timedelta(days=days)).date()
+    overdue = []
+    for name, details in member_dict.items():
+        last_date = datetime.strptime(details['last_contribution'], "%Y-%m-%d").date()
+        if last_date < cutoff:
+            overdue.append(name)
+    if overdue:
+        print(f"⚠️ Members overdue (> {days} days): {', '.join(overdue)}")
+    else:
+        print(f"✅ All members contributed within last {days} days.")
+    return overdue
+
 
 # ---------------------------
 # 7. TEST/ DEMO CODE
@@ -270,3 +286,5 @@ if __name__ == "__main__":
     
     # Save to file
     save_data(members)
+
+    overdue_contributions(members, 30)
