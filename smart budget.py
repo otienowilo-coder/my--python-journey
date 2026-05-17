@@ -11,7 +11,7 @@ is_essential=input("is this essential? (yes/no):").lower()=='yes'
 has_emergency_fund =input("Do you haveemegency fund? (yes/no)").lower () =='yes'
 
 #2.CALCULATE KEY METRICS
-expense_ratio=(monthly_expense/ monthly_income) #percentag
+expense_ratio=(monthly_expense/ monthly_income) #percentage
 savings =monthly_income-monthly_expense
 
 #3.BOOLEAN FLAGS(The core logic variables)
@@ -20,7 +20,7 @@ is_expense_large = expense_ratio>30
 can_afford= savings >0
 
 #4.SMART ADVICE LOGIC (if/elif/else with logical operators)
-print("/n== Analysis==")
+print("== Analysis==")
 
 if not can_afford:
     advice = "CRITICAL: this expense exceeds your income!"
@@ -45,4 +45,5 @@ if is_essential:
 else:
     print("For non-essential expenses, try a 24-hour 'cooling off' period")
     if expense_ratio > 20:
-        print("Consider savinf for thisover 2-3 months")
+        print("Consider saving for thisover 2-3 months")
+

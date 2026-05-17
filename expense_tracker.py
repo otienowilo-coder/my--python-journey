@@ -31,7 +31,7 @@ print(f'is over budget ?{is_over_budget}')
 
 #IF/ELSE 
 if expense_amount >budget:
-    print('OVER BUDGET! considfe reducing this expense')
+    print('OVER BUDGET! considereducing this expense')
 elif expense_amount== budget:
     print("Exactly at budget limit")
 else:

@@ -1,0 +1,37 @@
+{
+  "Mama": {
+    "balance": 7350.0,
+    "phone": "072345678",
+    "joined": "2024-01-10",
+    "last_contribution": "2026-03-02",
+    "transactions": [
+      {
+        "date": "2026-03-02",
+        "amount": 1000,
+        "type": "contribution",
+        "balance_after": 7000
+      }
+    ]
+  },
+  "Jane": {
+    "balance": 3150.0,
+    "phone": "072345678",
+    "joined": "2024-01-15",
+    "last_contribution": "2024-02-08",
+    "transactions": []
+  },
+  "Alice": {
+    "balance": 4725.0,
+    "phone": "073456789",
+    "joined": "2024-01-20",
+    "last_contribution": "2024-02-12",
+    "transactions": []
+  },
+  "Cate": {
+    "balance": 2100.0,
+    "phone": "",
+    "joined": "2026-03-02",
+    "last_contribution": "2026-03-02",
+    "transactions": []
+  }
+}

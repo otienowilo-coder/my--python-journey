@@ -262,6 +262,15 @@ def overdue_contributions(member_dict, days=30):
         print(f"✅ All members contributed within last {days} days.")
     return overdue
 
+def simulate_growth(member_dict, months=6, rate=0.05):
+    """Show projected balances after 'months' of compound interest."""
+    print(f"📈 Projected growth over {months} months ({rate*100}% monthly):")
+    for name, details in member_dict.items():
+        bal = details['balance']
+        print(f"\n{name}: Starting Ksh {bal}")
+        for m in range(1, months+1):
+            bal += bal * rate
+            print(f"   Month {m}: Ksh {bal:.2f}")
 
 # ---------------------------
 # 7. TEST/ DEMO CODE
@@ -287,4 +296,9 @@ if __name__ == "__main__":
     # Save to file
     save_data(members)
 
+    # Add contribution
     overdue_contributions(members, 30)
+
+    # Simulate growth
+    simulate_growth(members, months=3)
+    
