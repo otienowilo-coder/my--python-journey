@@ -15,9 +15,14 @@ def get_exchange_rates(base_currency):
 
 def convert_currency(amount, from_currency, to_currency):
     rates = get_exchange_rates(from_currency)
-    rate = rates[to_currency]
-    return amount * rate
-print(convert_currency(100, 'USD', 'EUR'))
-  
+   
+    try:
+         rate = rates[to_currency]  
+    except KeyError as e:
+       print(f"Error fetching exchange rate: {e}")
+       return None
 
- 
+    return amount * rate
+
+#print(convert_currency(100, 'USD', 'EUR'))
+print(convert_currency(100, 'USD', 'XYZ'))
