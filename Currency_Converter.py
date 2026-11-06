@@ -4,6 +4,7 @@ API_URL = "https://api.exchangerate-api.com/v4/latest/"
 
 #FETCHING EXCHANGE RATES FROM API
 def get_exchange_rates(base_currency):
+    
     try:
         response = requests.get(f"{API_URL}{base_currency}")
         response.raise_for_status()  # Raise an error for bad responses
@@ -14,6 +15,8 @@ def get_exchange_rates(base_currency):
         return None
 
 def convert_currency(amount, from_currency, to_currency):
+    from_currency = from_currency.upper()
+    to_currency = to_currency.upper()
     rates = get_exchange_rates(from_currency)
    
     try:
@@ -25,4 +28,5 @@ def convert_currency(amount, from_currency, to_currency):
     return amount * rate
 
 #print(convert_currency(100, 'USD', 'EUR'))
-print(convert_currency(100, 'USD', 'XYZ'))
+#print(convert_currency(100, 'USD', 'XYZ'))
+print(convert_currency(100, 'usd', 'eur'))
