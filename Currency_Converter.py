@@ -18,7 +18,9 @@ def convert_currency(amount, from_currency, to_currency):
     from_currency = from_currency.upper()
     to_currency = to_currency.upper()
     rates = get_exchange_rates(from_currency)
-   
+    if rates is None:
+        print("Failed to retrieve exchange rates.")
+        return None
     try:
          rate = rates[to_currency]  
     except KeyError as e:
