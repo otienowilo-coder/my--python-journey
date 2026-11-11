@@ -6,7 +6,7 @@ API_URL = "https://api.exchangerate-api.com/v4/latest/"
 def get_exchange_rates(base_currency):
     
     try:
-        response = requests.get(f"{API_URL}{base_currency}")
+        response = requests.get(f"{API_URL}{base_currency}", timeout=10)  # Set a timeout of 10 seconds
         response.raise_for_status()  # Raise an error for bad responses
         data = response.json()
         return data['rates']
