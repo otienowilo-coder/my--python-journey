@@ -24,11 +24,11 @@ def convert_currency(amount, from_currency, to_currency):
     try:
          rate = rates[to_currency]  
     except KeyError as e:
-       print(f"Error fetching exchange rate: {e}")
+       print(f"Unknown currency input: {e}")
        return None
 
     return amount * rate
 
 #print(convert_currency(100, 'USD', 'EUR'))
-#print(convert_currency(100, 'USD', 'XYZ'))
-print(convert_currency(100, 'usd', 'eur'))
+print(convert_currency(100, 'USD', 'XYZ'))
+#print(convert_currency(100, 'usd', 'eur'))
