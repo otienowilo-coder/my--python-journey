@@ -28,7 +28,14 @@ def convert_currency(amount, from_currency, to_currency):
        return None
 
     return amount * rate
+    amount = (float(input("Enter the amount to convert: ")))
+    print(amount)
+    #print(type(amount))
+    input_currency = input("Enter the currency to convert from (e.g., usd or eur): ")
+    output_currency = input("Enter the currency to convert to (e.g., gbp or jpy): ")
 
-#print(convert_currency(100, 'USD', 'EUR'))
-print(convert_currency(100, 'USD', 'XYZ'))
-#print(convert_currency(100, 'usd', 'eur'))
+
+amount = (float(input("Enter the amount to convert: ")))
+input_currency = input("Enter the currency to convert from (e.g., usd or eur): ")
+output_currency = input("Enter the currency to convert to (e.g., gbp or jpy): ")
+print(convert_currency(amount, input_currency, output_currency))
