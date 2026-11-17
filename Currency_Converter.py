@@ -30,8 +30,16 @@ def convert_currency(amount, from_currency, to_currency):
     return amount * rate
 
 
+while True:
+    try:
+        amount = (float(input("Enter the amount to convert: ")))
+        break
+        
+    except ValueError:
+        print("Invalid amount entered. Please enter a numeric value.")
+       
 
-amount = (float(input("Enter the amount to convert: ")))
+#amount = (float(input("Enter the amount to convert: ")))
 input_currency = input("Enter the currency to convert from (e.g., usd or eur): ")
 output_currency = input("Enter the currency to convert to (e.g., gbp or jpy): ")
 
