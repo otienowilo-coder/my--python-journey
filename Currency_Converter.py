@@ -33,6 +33,9 @@ def convert_currency(amount, from_currency, to_currency):
 while True:
     try:
         amount = (float(input("Enter the amount to convert: ")))
+        if amount <= 0:
+            print("Amount cannot be negative or zero. Please enter a positive value .")
+            continue
         break
         
     except ValueError:
